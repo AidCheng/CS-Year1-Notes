@@ -6,5 +6,7 @@ Covering Modules including:
 
 - [Principle of Programming](/Principle%20of%20Programming/COMP0002.md)
 - Algorithm
-- Algorithm
+- Theory of Computation
+- Discrete Math
+- Math Stats
 - Object Oriented Programming
