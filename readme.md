@@ -9,4 +9,4 @@ Covering Modules including:
 - Theory of Computation
 - Discrete Math
 - Math Stats
-- Object Oriented Programming
+- [Object Oriented Programming](/Object-Oriented-Programming/OOP.md)
