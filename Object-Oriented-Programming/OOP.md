@@ -1,5 +1,172 @@
 # Object Oriented Programming
 
+- [Object Oriented Programming](#object-oriented-programming)
+  - [Main focuses](#main-focuses)
+  - [Intro to Java](#intro-to-java)
+    - [Java v. C](#java-v-c)
+    - [Syntax](#syntax)
+    - [Terminal operation](#terminal-operation)
+    - [Class](#class)
+    - [Objects](#objects)
+    - [Print(Stream)](#printstream)
+    - [Java Normally Large, Why?](#java-normally-large-why)
+    - [Shorter?](#shorter)
+    - [Possible implementation for shorter expression](#possible-implementation-for-shorter-expression)
+  - [JVM](#jvm)
+    - [Java Compiler](#java-compiler)
+    - [Java Virtual Machine](#java-virtual-machine)
+    - [Linking](#linking)
+    - [Bytecode \& Machinecode](#bytecode--machinecode)
+  - [Core of Java](#core-of-java)
+    - [Java Types](#java-types)
+    - [Declaration v. Definition](#declaration-v-definition)
+    - [Variables](#variables)
+    - [Primitive types and Values (Same on all machines unlike C)](#primitive-types-and-values-same-on-all-machines-unlike-c)
+    - [Objects and References](#objects-and-references)
+    - [Type Checking Rules](#type-checking-rules)
+    - [Type inference](#type-inference)
+    - [Operators](#operators)
+    - [`==`](#)
+    - [Switch](#switch)
+    - [Scope and Lifetime](#scope-and-lifetime)
+    - [Comments](#comments)
+    - [Methods, Parameters and Return types](#methods-parameters-and-return-types)
+    - [Arrays](#arrays)
+    - [Length](#length)
+    - [Arrays - C v. Java](#arrays---c-v-java)
+    - [Container Classes](#container-classes)
+    - [Generic and Container Classes](#generic-and-container-classes)
+    - [Non-Generic ArrayList (DONT USE THIS !!!)](#non-generic-arraylist-dont-use-this-)
+    - [Container, Obejcts and Primitive](#container-obejcts-and-primitive)
+    - [Auto-boxing / Unboxing](#auto-boxing--unboxing)
+    - [Map](#map)
+  - [Arrays in Java](#arrays-in-java)
+    - [`Arrays`](#arrays-1)
+    - [Properties](#properties)
+    - [Bounds checking](#bounds-checking)
+    - [Array Length](#array-length)
+    - [Array Initialisation](#array-initialisation)
+    - [Iterating Using Stream](#iterating-using-stream)
+    - [2D Array](#2d-array)
+    - [Ragged Array](#ragged-array)
+    - [2D Iteration Stream](#2d-iteration-stream)
+    - [Class of Array Type](#class-of-array-type)
+    - [Class Arrays ('s' at the end)](#class-arrays-s-at-the-end)
+    - [Class `Array`](#class-array)
+  - [Class, Objects and References](#class-objects-and-references)
+    - [Abstraction](#abstraction)
+    - [Class Roles](#class-roles)
+    - [Notations](#notations)
+    - [UML](#uml)
+    - [Private and Public](#private-and-public)
+    - [encapsulation](#encapsulation)
+    - [References](#references)
+    - [`Error: NullPointerException`](#error-nullpointerexception)
+    - [Primitive type arguments](#primitive-type-arguments)
+    - [Call-by-value](#call-by-value)
+  - [Program Design](#program-design)
+    - [Use cases](#use-cases)
+    - [Open v. Filled Diamound Arrow in UML](#open-v-filled-diamound-arrow-in-uml)
+    - [An Example Customer Class](#an-example-customer-class)
+    - [Static](#static)
+    - [Optional](#optional)
+  - [Exceptions](#exceptions)
+    - [Runtime Errors](#runtime-errors)
+    - [Java Exceptions](#java-exceptions)
+    - [Exception example](#exception-example)
+    - [Checked \& Unchecked Exceptions](#checked--unchecked-exceptions)
+    - [Error Handling Strategies (Considering a Stack)](#error-handling-strategies-considering-a-stack)
+    - [Exception v. Optional](#exception-v-optional)
+    - [Java Exception Mechanism](#java-exception-mechanism)
+    - [`Throw`](#throw)
+    - [`Catch`](#catch)
+    - [`Finally`](#finally)
+  - [Java Records](#java-records)
+    - [Declaration](#declaration)
+    - [Boilerplate Code](#boilerplate-code)
+    - [Access](#access)
+    - [Adding method to record](#adding-method-to-record)
+    - [Record-based Tuple Structure](#record-based-tuple-structure)
+  - [Inheritence](#inheritence)
+    - [**Why having inheritance**](#why-having-inheritance)
+    - [Subclass ans Superclass](#subclass-ans-superclass)
+    - [Multiple subclasses](#multiple-subclasses)
+    - [Generalisation \& Specialisation](#generalisation--specialisation)
+    - [Abstract v. Concrete](#abstract-v-concrete)
+    - [Example Shapes and Squares](#example-shapes-and-squares)
+    - [Create Square Object](#create-square-object)
+    - [Keyword Abstract](#keyword-abstract)
+    - [Override](#override)
+    - [Superclass reference](#superclass-reference)
+    - [Dynamic Method Binding](#dynamic-method-binding)
+    - [Instance methods](#instance-methods)
+    - [Static Binding](#static-binding)
+    - [`final`](#final)
+  - [Interfaces](#interfaces)
+    - [Example IF](#example-if)
+    - [Default methods](#default-methods)
+  - [Polymorphism, Types, Interfaces and Generics](#polymorphism-types-interfaces-and-generics)
+    - [Polymorphism](#polymorphism)
+    - [Forms of Polymorphism](#forms-of-polymorphism)
+    - [Polymorphism and Inheritance](#polymorphism-and-inheritance)
+    - [Objects and Types](#objects-and-types)
+    - [Types](#types)
+    - [Type conformance](#type-conformance)
+    - [Type Hierarchies](#type-hierarchies)
+    - [Comparable](#comparable)
+    - [Programming to an Interface](#programming-to-an-interface)
+    - [`ArrayList<E>` declaration](#arrayliste-declaration)
+    - [Marker Interface](#marker-interface)
+    - [List Interface](#list-interface)
+    - [List and ArrayList](#list-and-arraylist)
+    - [Generic Interface (implementing List / ArrayList)](#generic-interface-implementing-list--arraylist)
+    - [Other examples](#other-examples)
+  - [Package](#package)
+    - [Package Hierarchy](#package-hierarchy)
+    - [Packages and Directories](#packages-and-directories)
+    - [Import](#import)
+    - [Java Class Libs](#java-class-libs)
+    - [Class Names and Packages](#class-names-and-packages)
+    - [Classpath](#classpath)
+    - [`.jar` File](#jar-file)
+    - [Modules](#modules)
+    - [Modules - Descriptor](#modules---descriptor)
+    - [Module Types](#module-types)
+    - [Example Module](#example-module)
+  - [JSON and CSV](#json-and-csv)
+    - [Java Script Object Notation](#java-script-object-notation)
+    - [Example](#example)
+    - [Jackson - reading JSON file](#jackson---reading-json-file)
+    - [CSV, Comma-Separated-Values](#csv-comma-separated-values)
+    - [Apache-Commons CSV](#apache-commons-csv)
+  - [Handling Files in Java](#handling-files-in-java)
+    - [The Basic Stream Abstraction](#the-basic-stream-abstraction)
+    - [Stream Architecture](#stream-architecture)
+    - [Streams and Files](#streams-and-files)
+    - [Class File](#class-file)
+    - [Manipulating Files / Directories](#manipulating-files--directories)
+    - [Pathnames](#pathnames)
+  - [Lambdas and Streams](#lambdas-and-streams)
+    - [Functional Interface](#functional-interface)
+    - [Using a Functional Interface](#using-a-functional-interface)
+    - [Implementing a function interface](#implementing-a-function-interface)
+    - [Solve Duplication](#solve-duplication)
+    - [Lambda](#lambda)
+    - [Lambda Syntax](#lambda-syntax)
+    - [Use Lambda](#use-lambda)
+    - [Binary Operator Interface](#binary-operator-interface)
+    - [Streams](#streams)
+    - [Stream Laziness](#stream-laziness)
+    - [Pipeline](#pipeline)
+    - [Collectors](#collectors)
+    - [Non-terminal stages](#non-terminal-stages)
+    - [Further Example on Pipelines](#further-example-on-pipelines)
+  - [Implementing Data Structures in Java - List](#implementing-data-structures-in-java---list)
+    - [Recap Example](#recap-example)
+    - [Implementing a Container Class](#implementing-a-container-class)
+
+<!-- TOC end -->
+
 ## Main focuses
 
 - Java Programming
@@ -454,12 +621,12 @@ int sum = Arrays.stream(twoD)
   
 ## Class, Objects and References
 
-- Classes is written using the programming language 
+- Classes is written using the programming language
 - Object is created and used while program running
 
 ### Abstraction
 
-- A representation or model that includes the ***important, essential aspects*** of something 
+- A representation or model that includes the ***important, essential aspects*** of something
 - while *ignoring the less important or diversionary details*
 - The process of *formulating geneeral concepts* by *abstracting common properties* of instances
 - **Classes represent abstraction**
@@ -659,7 +826,7 @@ int z = x/y;
 
 - Last-in First-out queue
 
-- A Generic Stack 
+- A Generic Stack
 
 ```java
 class GenericStack<T>{
@@ -779,10 +946,8 @@ try(Statement statement = connection.createStatement()){
 }
 ```
 
-- the statement object is *AutoClosable*, 
+- the statement object is *AutoClosable*,
 - meanning that the connection will be always closed when try/catch completed
-
-
 
 ## Java Records
 
@@ -1386,3 +1551,304 @@ module datastructures.cs.uk.ac.ucl{
   <version>2.13.0</version>
 </dependency>
 ```
+
+### CSV, Comma-Separated-Values
+
+- simple text format used to store tabular data
+  - In spreadsheet or database data
+
+### Apache-Commons CSV
+
+```xml
+<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-csv</artifactId>
+  <version>1.8</version>
+</dependency>
+```
+
+## Handling Files in Java
+
+### The Basic Stream Abstraction
+
+- FileInput and FileOutput Classes
+- Java Lib Classes for files I/O
+  - A *strream* is a seq of values with a source and destination
+  - Java libraries define a number of *stream classes
+    - Reader / Writer for dealing with char formateed data (*unicode char*)
+    - InputStream / OutputStream for dealing with unformatted data (*bytes*)
+
+### Stream Architecture
+
+![Stream-Architecture](2024-05-07-21-35-05.png)
+
+### Streams and Files
+
+- ![Streams and Files](2024-05-07-21-36-41.png)
+
+### Class File
+
+- A representation for *file/directory* **pathnames**
+  - Not actual files/directories or contents
+- Creating File objects specifies name/path only
+
+```java
+File myFile = new File("data.txt");
+File myDirectory = new File("/user/person/directory")
+```
+
+### Manipulating Files / Directories
+
+- File class methods provided
+  - exists
+  - isFile
+  - delete
+  - createNewFile
+  - renameTo
+- For directories
+  - mkdir
+  - listFiles
+  - isDirectory
+
+### Pathnames
+
+- Different *OS* represents paths differently
+- Class File will attempt to translate a path to the style supported on the current machine
+- Use `File.separator`
+  - `String path = "data" + File.separator + "patients.csv"`
+
+## Lambdas and Streams
+
+### Functional Interface
+
+- An interface that contains *only* one abstract method
+
+  ```java
+  @FunctionalInterface
+  public interface Messenger{
+  void notify(String message);
+  }
+  ```
+
+  - Marked by an annotation, compiler checks interface has only one method
+- Defines a type for a lambda, a function
+
+  ```java
+  @FunctionalInterface
+  public interface Call<T,R>{
+    R apply (T param);
+  }
+  ```
+  
+  - Call a method called apply with parameter of type T and returning a result of type R
+
+### Using a Functional Interface
+
+- Pass a function as a *method parameter*
+
+```java
+public void aMethod(Call<Integer, Integer> function){
+  Integer n = function.apply(5);
+  System.out.println("The value of n is" + n);
+}
+```
+
+- Taking an object (as an argument) that actually representing a function
+
+### Implementing a function interface
+
+```java
+public class Add implements Call<Integer, Integer>{
+  private final Integer value;
+  
+  public Add (Integer value){
+    this.value = value;
+  }
+
+  public Integer apply (Integer arg){
+    return value + arg;
+  }
+}
+
+// calling apply using aMethod method defined before
+Add addTo = new Add(10);
+aMethod(addTo);
+```
+
+- Another implementation
+
+```java
+public class Multiply implements Call<Integer, Integer> {
+  private final Integer value;
+
+  public Multiply(Integer value){
+    this.value = value;
+  }
+
+  public Integer apply(Integer arg){
+    return value * arg;
+  }
+}
+```
+
+### Solve Duplication
+
+- No need to write an **ENTIRE CLASS** just to implement a function
+- Using ***Lambda!***
+
+### Lambda
+
+- An anonymous function
+  - Like lambda expression in functional programming
+  - A universal model of calculation
+- Example
+  - `(Integer n) -> {return n*10;}`
+    - `Integer n`: parameter list
+    - `->` arrow token
+    - `{...}` Compound Statement (method body)
+    - Can be *shortened into* `n->n*10`
+
+### Lambda Syntax
+
+- Single parameter
+  - `(Integer x) -> {return Integer.toString(x);}` or `x -> Integer.toString(x)`
+- No parameter
+  - `() -> System.out.println("Hello World")`
+
+### Use Lambda
+
+```java
+aMethod(n -> n + 10);
+```
+
+- Type inference allows type checking to be done
+  - The type of `n -> n + 10` is consistent with the type declared in `aMethod`
+    - `Call<Integer,Integer>`
+
+### Binary Operator Interface
+
+```java
+@FunctionalInterface
+public interface BinaryOperator<T>{
+  T apply (T x, T y);
+}
+// parameters and return values are of the same type
+```
+
+- Streamlined syntax
+
+- use `(x,y) -> (x > y ? y : x)` is equivalent as
+  - `-> {if (x > y) {return x;} else {return y;}}`
+
+### Streams
+
+![Streams](2024-05-07-22-52-12.png)
+
+- A data source provides *value objects* to the Stream
+- Intermediate Operations
+  - *Map* applies operation to each value
+  - *Filter* removes unwanted values
+- Terminal Operation
+  - reduced to the *result* (value or collection)
+
+### Stream Laziness
+
+- A value object is passed from one operation *to the next*, when the *operation needs the value*
+  - Data is pulled through one by one, not pushed altogether
+- The *data source* can be a *data structure, file or anything that produces data items*
+
+### Pipeline
+
+```java
+aStream
+  .sorted()
+  .skip(2)
+  .limit(15)
+  .toArray(Integer::new)
+```
+
+`aStream`: aStream of Integers
+`.operation`: mapping, filtering etc.
+`limit`: stop after 15 values received
+`toArray`: reduce the values to an array
+
+### Collectors
+
+- Collect the items in a stream into a *container*
+  - `toList, toSet, toMap`
+
+```java
+Stream<String> stream = Stream.of (new String[]{"To","be","or","not","to","be"})
+List<String> as List = stream
+                        .peek(s -> System.out.print(s + " "))
+                        .collect(Collectors.toList());
+``` 
+
+### Non-terminal stages
+
+- Arbitrary number
+- Each function can transform values
+
+```java
+library.stream()
+  .map(book -> book.getAuthor())
+  .filter(author -> author.getAge() >= 30)
+  .map(Author::getName)
+  .map(String::toUpperCase)
+  .distinct()
+  .limit(20)
+  .collect(toList())
+```
+
+- Get unique name in uppercase of the first 20 authors over 30 yrs old
+
+### Further Example on Pipelines
+
+```java
+record Student(String name, int score) {}
+
+OptionalDouble getAveragePassMark(List<Student> students, int passMark){
+  OptionalDouble averageScore = students.stream()
+    .filter(student -> student.score >= passMark)
+    .mapToInt(student -> student.score)
+    .average()
+  return averageScore;
+}
+
+public static void main(String[] args){
+  List<Student> students = Array.asList(
+    new Student("A",80), newStudent("B", 55)
+  )
+  OptionalDouble averageScore = getAveragePassMark(students, 40);
+  averageScore.ifPresentOrElse(
+    avg -> System.out.printf("The average mark for student passed if %.2f%n", avg),
+    () -> System.out.println("No student passed")
+  )
+  // public void ifPresentOrElse(DoubleConsumer action, Runnable emptyAction)
+}
+```
+
+## Implementing Data Structures in Java - List
+
+### Recap Example
+
+```java
+class Pair<X,Y>{
+  private X x;
+  private Y y;
+  public Pair (X x, Y y) {
+    ... // constructor
+  }
+
+  public X getX() {...}
+  publit Y getY() {...}
+}
+
+// or
+record Pair<X,Y> (X x, Y y){}
+
+// can be directly used
+new Pair <String, Integer> ("Hello",1);
+```
+
+### Implementing a Container Class
