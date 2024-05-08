@@ -173,7 +173,10 @@
     - [Iterating](#iterating)
     - [LinkedList Class](#linkedlist-class)
     - [SimpleList Interface](#simplelist-interface)
-    - [Junit Test](#junit-test)
+    - [List Element](#list-element)
+    - [LinkedList](#linkedlist)
+    - [Class UML Diagram](#class-uml-diagram)
+  - [Junit Test](#junit-test)
     - [JUnit](#junit)
     - [JUnit Concept](#junit-concept)
     - [Unit Testing Concept](#unit-testing-concept)
@@ -1986,7 +1989,88 @@ public interface SimpleList<T> extends InsertIterable<T>{
 }
 ```
 
-### Junit Test
+### List Element
+
+```java
+/** 
+ * top level class
+ * Can be used to create chains of objects directly, without linked list class
+ */
+private static class ListElement<E>{
+  private ListElement<E> next;
+  private E value;
+  public ListElement(ListElement<E> next, E value){
+    this.next = next;
+    this.value = value;
+  }
+  
+  public ListElement<E> copy(){
+    return new ListElement<E>(next == null ? null: next.copy(), value);
+  }
+
+  public ListElement<E> next(){
+    return next;
+  }
+
+  public E value (return value;)
+}
+```
+
+### LinkedList
+
+```java
+public class LinkedList<T> implements SimpleList<T>{
+  private List Element<T> head;
+
+  private static class ListElement<E>{
+    // use the above
+  }
+
+  public LinkedList(ListElement<T> e){
+    head = e;
+  }
+
+  public void insertHead(T val){
+    head = new ListElement<T>(head, val);
+  }
+
+  public T getHead(){
+    return (head == null)?null : head.value();
+  }
+
+  public SimpleList<T> getTail(){
+    if((head == null) || (head.next() == null)){
+      return new LinkedList<T>();
+    }
+    return new LinkedList<T>(head.next().copy());
+  }
+
+  public boolean isEmpty(){
+    return head == null;
+  }
+}
+
+//InsertIterator
+
+private class LinkedListInsertIterator
+  extends LinkedListIterator
+  implements InsertIterator<T>{
+    public void insert(T value){
+      if ((head == null) || (current == dummy)){
+        insertHead(value);
+        current newListElement<T> (head,null);
+        return;
+      }
+      current.next = newListElement<T> (current.next(), value);
+    }
+  }
+```
+
+### Class UML Diagram
+
+![LinkedListUML](2024-05-08-09-42-15.png)
+
+## Junit Test
 
 - Aims to find an error in the code being tested
 - *connt prove* code is correct
