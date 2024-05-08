@@ -164,6 +164,27 @@
   - [Implementing Data Structures in Java - List](#implementing-data-structures-in-java---list)
     - [Recap Example](#recap-example)
     - [Implementing a Container Class](#implementing-a-container-class)
+    - [Implementing Properties](#implementing-properties)
+    - [Iterators](#iterators)
+    - [Iterator Object](#iterator-object)
+    - [Iterator Interface](#iterator-interface)
+    - [Implementing Iterator](#implementing-iterator)
+    - [Iterator Subclasses](#iterator-subclasses)
+    - [Iterating](#iterating)
+    - [LinkedList Class](#linkedlist-class)
+    - [SimpleList Interface](#simplelist-interface)
+    - [Junit Test](#junit-test)
+    - [JUnit](#junit)
+    - [JUnit Concept](#junit-concept)
+    - [Unit Testing Concept](#unit-testing-concept)
+    - [Arrange/Act/Assert (Given/When/Then)](#arrangeactassert-givenwhenthen)
+    - [JUnite Example](#junite-example)
+    - [Fixtures](#fixtures)
+    - [Names](#names)
+    - [Lifecycle](#lifecycle)
+    - [What to test?](#what-to-test)
+    - [Refined Process](#refined-process)
+    - [Refactoring](#refactoring)
 
 <!-- TOC end -->
 
@@ -1852,3 +1873,245 @@ new Pair <String, Integer> ("Hello",1);
 ```
 
 ### Implementing a Container Class
+
+- Need a data structure to store the *contained object references*
+  - One or more instance variables
+- Need algorithms to access operations through method
+
+### Implementing Properties
+
+- Need think about...
+  - Memory use
+  - Operation efficiency
+  - Appropriate set of provided methods
+- Need to select implementations that **matches** the program needs
+- Can have *several implementations*, conforming to the same interface for the *same abstraction*
+  - List -> ArrayList, LinkedList
+
+### Iterators
+
+- provide a mechanism for *accessing each element in sequence*
+  - called *iterator*
+  - aims to *decouple* element access from container implementation
+  - the order which elements are accessed may be *undefined*
+
+### Iterator Object
+
+- General abstraction of iteration
+
+```java
+ArrayList<String> a = new ArrayList<String>()
+
+// ask ArrayList object for an iterator
+for(Iterator<String> i = a.iterator(); i.hasNext();){
+  doSomething(i.next());
+}
+
+// or
+a.forEach(Main::doSomething)
+// forEach() creates and uses an iterator object 
+// to access each element in arrayList a that can call the doSomething method
+```
+
+### Iterator Interface
+
+- The type *Iterator* is declared as an *interface*
+
+```java
+public interface Iterator <E> {
+  boolean hasNext();
+  E next();
+
+  default void remove(){
+    throw new UnsupportedOperationException("remove");
+  }
+
+  default void forEachRemaining(Consumer<? super E> action){
+    //behaves like
+    // while(hasNext()) action.accept
+  }
+}
+```
+
+### Implementing Iterator
+
+```java
+class MyIterator<E> implements Iterator<E> {
+  // Override non-default methods declared in the interface
+}
+```
+
+- An *iterator object* allows each value in a collection to be visited in turn (*iterated*)
+- A variable of type *iterator* can reference an object of an *implementing class*
+- `Iterator<String> iterator = new MyIterator<String>(...)`
+
+### Iterator Subclasses
+
+- Typically declared as *private nested inner class*
+  - inside a container class
+  - In the container *class* *scope*
+  - has access to *private* data
+  - Cannot be used *outside the class*
+
+### Iterating
+
+```java
+public <E> void print(Iterator<E> iterator) {
+  while (iterator.hasNext()){
+    doSomething();
+  }
+}
+// The class of actual iterator object (implemnted through iterator IF) does not need to be known here
+```
+
+### LinkedList Class
+
+- Structure
+  - 4 classes in total
+  - Only LinkedList is public
+    - Implements `Simple List` IF
+  - ListElement: building block class
+  - LinkedListIterator: provide iterator objects *implementing public interface*
+    - LinkedListIterator
+    - LinkedListInsertIterator
+
+### SimpleList Interface
+
+```java
+public interface SimpleList<T> extends InsertIterable<T>{
+  void insertAtHead(T val);
+  T getHeadOfList();
+  SimpleList<T> getTailOfList();
+  boolean() isEmpty();
+}
+```
+
+### Junit Test
+
+- Aims to find an error in the code being tested
+- *connt prove* code is correct
+- Should deliberately be targeted at *things might be wrong*
+  - *Boundary Condition*
+  - Invalid Values
+  - Wrong Input
+
+### JUnit
+
+- A Unit test framework
+- **UNIT** is a *specific small-sized* piece of functionality
+  - part of a class
+  - a method
+  - a line code
+
+### JUnit Concept
+
+- A test class is *an ordinary java class* with *test annotations*
+- Test classes are grouped into *test suites*
+- JUniat test framework identifies and runs all the tests in a class or suite
+
+### Unit Testing Concept
+
+- Create an object of a class being tested
+- Call a method
+- Check the return value
+- Or *if a void method*, call another non-void method and check the value returned
+  - Observing *the state of object*
+
+### Arrange/Act/Assert (Given/When/Then)
+
+- A template for structure of a test
+  - Arrange: *Set up environment*, initial conditions and test fixtures
+  - Act: *Call* the method or code being tested
+  - Assert: *Verify* the outcome against what was expected
+
+### JUnite Example
+
+```java
+public class SimpleCalculator {
+  private int result; 
+  public SimpleCalculator() {result = 0;}
+
+  public void add(int number) {result += number;}
+
+  public int getResult(){return result;}
+}
+
+// A Test Class
+class WhenACalculationIsPerformed {
+  @Test
+  public void adding_a_value_to_zero_should_give_that_value(){
+    SimpleCalculator calculator = new SimpleCalculator();
+    calculator.add(5);
+    //(Expected value, Returned value)
+    assertEquals(5, calculator.getResult(),"should return 5"); // assert, message is optional
+  }
+}
+```
+
+- The IDE will recognise this chunk of code
+- Providing way to run the test using JUnit
+  - Green: Passed
+  - Red: Failure, Exception is thrown
+
+### Fixtures
+
+- A fixture is an *object to be tested*
+- As most or all tests need the fixture, a method is added to *initialise* the fixture
+
+```java
+private SimpleCalculator calculator;
+@BeforeEach
+// Dont have to arrange the fixture in the test method
+public void setUp(){calculator = new SimpleCalculator();}
+```
+
+- Runs before *each test method in the class* to create fixtures
+- Running of a previous test should not affect *current test*
+- Order of test *does not matter*
+
+### Names
+
+- Long Descriptive Names
+  - Imply the intent of the test class or test
+  - names should make test code as *self-documenting* as possible
+
+### Lifecycle
+
+- For each test class
+  - Load the class
+  - For each method marked @Test
+    - Call @BeforeEach method to *setup* fixtures
+    - Call @Test method
+      - *Assertion* used to check result
+    - Record the result of running test
+    - *Discard* fixtures
+
+### What to test?
+
+- Small sections of code - unit
+  - Method *parameter* values are valid
+  - *Return* value correct
+  - *Data structure* state and content
+  - *Bound Condition*
+    - Loop ite, values too small/large
+  - Different *paths* through a method
+  - Error handling paths
+  - Input/output
+    - Harder to do without *good design*
+  
+### Refined Process
+
+- Determine what code is tryint to be written
+- Iterate
+  - Write a test for a small piece of *functionality*
+  - Write just enough stb code to *let the test compile*
+  - Run the test and see it fail
+  - Write or modify the simplest version of the code that will pass the test
+  - Reactor as necessary to clean code and maintain quality
+
+### Refactoring
+
+- Clean up, simplifying and rearranging code
+- Make code more *expressive*
+- Vital to keep code quality *high*
+- A *single refactoring* describes a *systematic and reversible* way of *modifying code*
