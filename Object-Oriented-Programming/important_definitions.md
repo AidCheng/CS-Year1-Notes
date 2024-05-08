@@ -46,3 +46,42 @@
 
 - Overloading
   - The ability of allowing two or more methods with the same name and different parameter list to be defined in the same scope of a class
+
+- Java Reference v. C / C++ pointers
+  - A reference is an abstract handle that refers to an object's location in the memory which doesn't expose the memory address directly.
+  - A pointer hold the memory address of the object they point to, which allows direct manipulation of memory
+  - Why Use *Reference*?
+    - By abstracting away direct memory manipulation, it is easier to write safe and reliable code in Java
+    - Reference also enable Java's garbage collection to automatically manages memory by reclaiming unused object
+  - Memory management in Java
+    - Java employs automatic management *through garbage collection*
+      - when object is no longer referenced, it becomes eligible for garbage collection
+      - The JVM *periodically* runs a garbage collector to identify and remove unreachable objects
+      - Reduce the risk from memory leak and segmentation faults.
+  
+- Dynamic Binding
+  - A mechanism that the method or function that gets called upon an object is determined at runtime.
+
+- Pass-by-value
+  - In PBV, the copy of actual value (not the variable itself) is passed to the function
+
+- Pass-by-reference
+  - A refernce to the actual variable is passed to the function
+
+- Binding
+  - The association between a name and the entity it represent
+
+- Coupling
+  - the degree of dependency between two part of the system
+
+- Decoupling
+  - reducing the dependencies between two part of the system
+
+- static final variable
+  - A variable that is immutable and belongs to the class instead of the object
+
+- Cohesion
+  - The degree which the elements within a module are related to each other
+
+- Cohesive function
+  - The function performs a single, well-defined takes or responsibility

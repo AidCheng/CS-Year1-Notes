@@ -144,6 +144,7 @@
     - [Stream Architecture](#stream-architecture)
     - [Streams and Files](#streams-and-files)
     - [Class File](#class-file)
+    - [Read File](#read-file)
     - [Manipulating Files / Directories](#manipulating-files--directories)
     - [Pathnames](#pathnames)
   - [Lambdas and Streams](#lambdas-and-streams)
@@ -1619,6 +1620,22 @@ module datastructures.cs.uk.ac.ucl{
 ```java
 File myFile = new File("data.txt");
 File myDirectory = new File("/user/person/directory")
+```
+
+### Read File
+
+```java
+try(Scanner reader = new Scanner(new File(filename))){
+  while(reader.hasNextLine()){
+    try{
+      int number = Integer.parseInt(reader.nextLine().trim());
+    } catch (NumberFormatException e){
+      // ignore 
+    }
+  }
+} catch (IOexception e){
+  throw new Exception("Error reading" + e.getMessage());
+}
 ```
 
 ### Manipulating Files / Directories
