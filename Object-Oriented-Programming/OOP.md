@@ -177,6 +177,23 @@
     - [List Element](#list-element)
     - [LinkedList](#linkedlist)
     - [Class UML Diagram](#class-uml-diagram)
+  - [Implementing Data Structure in Java - Binary Trees and Hash Tables](#implementing-data-structure-in-java---binary-trees-and-hash-tables)
+    - [Trees](#trees)
+    - [Ordered Binary Tree](#ordered-binary-tree)
+    - [Tree node implementation](#tree-node-implementation)
+    - [Tree Interface](#tree-interface)
+    - [Binary Tree Implementation](#binary-tree-implementation)
+    - [Binary Tree Iterator Class](#binary-tree-iterator-class)
+      - [Iterator Example](#iterator-example)
+    - [Maps(Hash Tables/Dictionaries)](#mapshash-tablesdictionaries)
+    - [Hash Table](#hash-table)
+    - [Mapping](#mapping)
+    - [Hash Function](#hash-function)
+    - [HashTable Interface](#hashtable-interface)
+    - [Chained Hashing](#chained-hashing)
+    - [Chain Node Class](#chain-node-class)
+    - [Hash Table Class](#hash-table-class)
+    - [Generalise: Key and Values](#generalise-key-and-values)
   - [Junit Test](#junit-test)
     - [JUnit](#junit)
     - [JUnit Concept](#junit-concept)
@@ -1630,7 +1647,7 @@ try(Scanner reader = new Scanner(new File(filename))){
     try{
       int number = Integer.parseInt(reader.nextLine().trim());
     } catch (NumberFormatException e){
-      // ignore 
+      //Ignore 
     }
   }
 } catch (IOexception e){
@@ -2087,10 +2104,214 @@ private class LinkedListInsertIterator
 
 ![LinkedListUML](2024-05-08-09-42-15.png)
 
+## Implementing Data Structure in Java - Binary Trees and Hash Tables
+
+### Trees
+
+- an variation of data structures based on *linked element*
+- use a *hierachical organisation*
+- Properties
+  - Each node has *one and only one parent* (except root)
+  - no links up the data structure (one-way only)
+  - No sibling links (*no links between nodes at same level*)
+
+### Ordered Binary Tree
+
+- Must be possible to compare values in a tree
+- must *implement the Comparable interface*
+
+```java
+public interface Comparable<T>{
+  int compareTo(T obj);
+}
+```
+
+- Compare *this object* with the specified object *for order*
+
+### Tree node implementation
+
+```java
+// E is constrained to be a subclass of Comparable
+private static class TreeNode<E extends Comparable<E>>{
+  E value;
+  TreeNode<E> left;
+  TreeNode<E> right;
+  public TreeNode(E value, TreeNode<E> left, TreeNode<E> right){
+    //this.var = val
+  }
+  // Other helper methods
+  public void insert(final E obj);
+  int compareTo(final T obj);
+  TreeNode<E> remove(final E obj, TreeNode<E> t); //
+
+  // A recursive method to find a matching value
+  public TreeNode<E> find(final T obj){
+    int temp = value.compareTo(obj);
+    if (temp == 0){
+      return this;
+    } else if (temp < 0){
+      return (right == null) ? null : right.find(obj);
+    } else {
+      return (left == null) ? null : left.find(obj);
+    }
+  }
+}
+```
+
+### Tree Interface
+
+```java
+public interface Tree<T>{
+  void add(final T obj);
+  boolean contains(final T obj);
+  void remove(final T obj);
+  Iterator<T> iterator();
+}
+```
+
+### Binary Tree Implementation
+
+```java
+public class BinaryTree <T extends Comparable<T>> implements Tree<T>{
+  private static class TreeNode<E extends Comparable<E>>{...} //implemented above
+
+  private TreeNode<T> root = null;
+  public BinaryTree(){...}  //Constructor
+
+  public void add(final T obj){...}
+  public void remove(final T obj){...}
+  public boolean contains(final t obj){...};
+  // Iterator
+  public Iterator iterator(){...}//in what order?
+}
+```
+
+- Iterating Approach
+  - In-order
+  - Pre-order
+  - Post-order
+  - Level-order (BFS)
+  
+### Binary Tree Iterator Class
+
+```java
+Iterator<String> iterator = tree.iterator();
+while(iterator.hasNext()){
+  System.out.println(iterator.next());
+}
+```
+
+- The iterator need to now where it was between each call of *`next()`*
+- If depth first search, could use a *stack*
+
+#### Iterator Example
+
+```java
+private class InOrderIterator implements Iterator<T>{
+  // use stack to remember the path through the tree as iteration occurs
+  private Stack<TreeNode<T>> nodes = new Stack<>();
+  public InOrderIterator() {pushLeft(root);}
+
+  private void pushLeft(TreeNode<T> node){
+    while(node!=null){
+      nodes.push(node);
+      node = node.left;
+    }
+  }
+
+  public T next() {
+    if(nodes.isEmpty())
+      return null;
+    TreeNode<T> node = nodes.pop();
+    pushLeft(node.right);
+  }
+}
+```
+
+### Maps(Hash Tables/Dictionaries)
+
+- Arrays and ArrayList can be thought of as implementations of *maps* where the key is *always and int*
+
+### Hash Table
+
+- A structure that implements a *Map* from any class type to any class type
+  - `Map: String -> Colour`
+  - `Colour c = a.get("green")`
+
+### Mapping
+
+- Want to implement a generalise mapping
+  - Set up a mapping from *key to an int value*
+  - Then use the int as *an array index*
+
+### Hash Function
+
+`int key = (key[0] + 3*key[1]) % tableSize`
+
+- in Java every object has a *hash code* to enable proper storage in hash tables and other data structure
+- Given that there are more keys than array entries
+  - need to handle collision
+
+### HashTable Interface
+
+```java
+public interface HashTable<K,V>{
+  void put(final K key, final V value);
+  V get (final K key);
+  void remove(final K key);
+  SimpleList<K> keys();
+}
+```
+
+### Chained Hashing
+
+![Hashing](2024-05-08-23-30-39.png)
+
+- The hash table is an *array of linked nodes*
+- The first stage of a hahs table *get/put* is to use hash function to *access an array element*
+- The second stage is a *linear search* along the linked chain of nodes
+- allow for *ovf* when hash value collide
+
+### Chain Node Class
+
+```java
+private static class Entry<S,T>{
+  public Entry<S,T> next;
+  public S key;
+  public T value;
+  // constructor
+  public Entry(final Entry<S,T> next, final S key, final T value){
+    this.next = next;
+    this.key = key;
+    this.value = value;
+  }
+}
+```
+
+### Hash Table Class
+
+```java
+class ChainedHashTable<K,V> implements HashTable<K,V> {
+  private static class Entry<S,T> {...}
+
+  private static final int DEFAULT_SIZE = 100;
+  private Entry<K,V>[] data; // a list of entry
+  public ChainedHashTable(final int size){
+    data = (Entry<K,V>[]) Array.newInstance(Entry.class,size);
+  }
+  public ChainedHashTable(){
+    this(DEFAULT_SIZE);
+  }
+  //others: put, get method
+}
+```
+
+### Generalise: Key and Values
+
 ## Junit Test
 
 - Aims to find an error in the code being tested
-- *connt prove* code is correct
+- *cannot prove* code is correct
 - Should deliberately be targeted at *things might be wrong*
   - *Boundary Condition*
   - Invalid Values
